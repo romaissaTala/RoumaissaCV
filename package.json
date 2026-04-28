@@ -1,0 +1,44 @@
+{
+  "name": "romaissa-cv",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "seed": "ts-node --project tsconfig.seed.json lib/seed.ts"
+  },
+  "dependencies": {
+    "@heroicons/react": "^2.1.5",
+    "bcryptjs": "^2.4.3",
+    "cloudinary": "^2.4.0",
+    "dotenv": "^17.4.2",
+    "framer-motion": "^11.3.8",
+    "mongoose": "^8.5.0",
+    "next": "^16.2.4",
+    "next-auth": "^4.24.7",
+    "next-cloudinary": "^6.10.0",
+    "nodemailer": "^7.0.7",
+    "react": "^18",
+    "react-dom": "^18",
+    "react-dropzone": "^14.2.3",
+    "react-hot-toast": "^2.4.1",
+    "zod": "^3.23.8"
+  },
+  "devDependencies": {
+    "@types/bcryptjs": "^2.4.6",
+    "@types/node": "^20.19.39",
+    "@types/nodemailer": "^6.4.15",
+    "@types/react": "^18",
+    "@types/react-dom": "^18",
+    "autoprefixer": "^10.0.1",
+    "eslint": "^8",
+    "eslint-config-next": "14.2.5",
+    "postcss": "^8",
+    "tailwindcss": "^3.4.1",
+    "ts-node": "^10.9.2",
+    "tsx": "^4.21.0",
+    "typescript": "^5.9.3"
+  }
+}

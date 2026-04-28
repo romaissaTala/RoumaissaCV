@@ -1,0 +1,183 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --gold: #D4A843;
+  --gold-light: #E8C472;
+  --gold-dark: #B8922E;
+  --dark-bg: #1A1A1A;
+  --dark-card: #222222;
+  --dark-sidebar: #1E1E1E;
+  --dark-input: #2A2A2A;
+  --dark-border: #333333;
+  --dark-hover: #2E2E2E;
+  --text-primary: #FFFFFF;
+  --text-secondary: #CCCCCC;
+  --text-muted: #888888;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--dark-bg);
+  color: var(--text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+  min-height: 100vh;
+}
+
+/* ── Scrollbar ─────────────────────────────────────── */
+::-webkit-scrollbar {
+  width: 6px;
+}
+::-webkit-scrollbar-track {
+  background: var(--dark-bg);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--dark-border);
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--gold-dark);
+}
+
+/* ── Selection ─────────────────────────────────────── */
+::selection {
+  background-color: rgba(212, 168, 67, 0.3);
+  color: var(--text-primary);
+}
+
+/* ── Gold accent ───────────────────────────────────── */
+.text-gold {
+  color: var(--gold);
+}
+.border-gold {
+  border-color: var(--gold);
+}
+
+/* ── Skill bar animation ────────────────────────────── */
+.skill-bar-fill {
+  animation: skillFill 1.2s ease-out forwards;
+  width: 0%;
+}
+
+@keyframes skillFill {
+  to {
+    width: var(--target-width);
+  }
+}
+
+/* ── Tab underline animation ───────────────────────── */
+.tab-active-indicator {
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  height: 2px;
+  background: var(--gold);
+  width: 0;
+  transition: width 0.3s ease;
+}
+
+/* ── Card hover ─────────────────────────────────────── */
+.card-hover {
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+.card-hover:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+/* ── Input focus ─────────────────────────────────────── */
+.cv-input {
+  background: var(--dark-input);
+  border: 1px solid var(--dark-border);
+  color: var(--text-primary);
+  border-radius: 8px;
+  padding: 12px 16px;
+  width: 100%;
+  outline: none;
+  transition: border-color 0.2s ease;
+}
+.cv-input:focus {
+  border-color: var(--gold);
+}
+.cv-input::placeholder {
+  color: var(--text-muted);
+}
+
+/* ── Timeline dot ────────────────────────────────────── */
+.timeline-dot::before {
+  content: "";
+  position: absolute;
+  left: -28px;
+  top: 6px;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--gold);
+  border: 2px solid var(--dark-bg);
+}
+
+/* ── Section underline ───────────────────────────────── */
+.section-underline {
+  width: 40px;
+  height: 3px;
+  background: var(--gold);
+  border-radius: 2px;
+  margin-top: 6px;
+  margin-bottom: 24px;
+}
+
+/* ── Fade in animation ───────────────────────────────── */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fade-in-up {
+  animation: fadeInUp 0.4s ease-out forwards;
+}
+
+/* ── Project card overlay ─────────────────────────────── */
+.project-card-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.4) 50%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.project-card:hover .project-card-overlay {
+  opacity: 1;
+}
+
+/* ── Sidebar info icon ────────────────────────────────── */
+.sidebar-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 8px;
+  background: var(--dark-hover);
+  border: 1px solid var(--dark-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
