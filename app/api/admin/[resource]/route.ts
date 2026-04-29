@@ -37,13 +37,15 @@ async function requireAuth() {
 // GET /api/admin/[resource]
 export async function GET(
   req: NextRequest,
-  { params }: { params: { resource: string } }
+  { params }: { params: Promise<{ resource: string }> }
 ) {
   if (!(await requireAuth())) {
     return NextResponse.json({ success: false, error: "Non autorisé" }, { status: 401 });
   }
 
-  const model = MODEL_MAP[params.resource] as { find?: Function; findOne?: Function } | undefined;
+  const { resource } = await params; // ⭐ FIX: Await params here
+  
+  const model = MODEL_MAP[resource] as { find?: Function; findOne?: Function } | undefined;
   if (!model) {
     return NextResponse.json({ success: false, error: "Ressource inconnue" }, { status: 404 });
   }
@@ -52,7 +54,7 @@ export async function GET(
 
   try {
     let data;
-    if (params.resource === "profile") {
+    if (resource === "profile") {
       data = await (model as typeof ProfileModel).findOne().lean();
     } else {
       data = await (model as typeof ExperienceModel).find().sort({ order: 1 }).lean();
@@ -66,13 +68,15 @@ export async function GET(
 // POST /api/admin/[resource]  → create
 export async function POST(
   req: NextRequest,
-  { params }: { params: { resource: string } }
+  { params }: { params: Promise<{ resource: string }> }
 ) {
   if (!(await requireAuth())) {
     return NextResponse.json({ success: false, error: "Non autorisé" }, { status: 401 });
   }
 
-  const model = MODEL_MAP[params.resource];
+  const { resource } = await params; // ⭐ FIX: Await params here
+  
+  const model = MODEL_MAP[resource];
   if (!model) {
     return NextResponse.json({ success: false, error: "Ressource inconnue" }, { status: 404 });
   }
@@ -91,13 +95,15 @@ export async function POST(
 // PUT /api/admin/[resource]  → update (with ?id=xxx for non-profile)
 export async function PUT(
   req: NextRequest,
-  { params }: { params: { resource: string } }
+  { params }: { params: Promise<{ resource: string }> }
 ) {
   if (!(await requireAuth())) {
     return NextResponse.json({ success: false, error: "Non autorisé" }, { status: 401 });
   }
 
-  const model = MODEL_MAP[params.resource];
+  const { resource } = await params; // ⭐ FIX: Await params here
+  
+  const model = MODEL_MAP[resource];
   if (!model) {
     return NextResponse.json({ success: false, error: "Ressource inconnue" }, { status: 404 });
   }
@@ -109,7 +115,7 @@ export async function PUT(
     const { _id, ...rest } = body;
 
     let doc;
-    if (params.resource === "profile") {
+    if (resource === "profile") {
       doc = await (model as typeof ProfileModel).findOneAndUpdate({}, rest, { new: true, upsert: true });
     } else {
       doc = await (model as typeof ExperienceModel).findByIdAndUpdate(_id, rest, { new: true });
@@ -124,13 +130,15 @@ export async function PUT(
 // DELETE /api/admin/[resource]?id=xxx
 export async function DELETE(
   req: NextRequest,
-  { params }: { params: { resource: string } }
+  { params }: { params: Promise<{ resource: string }> }
 ) {
   if (!(await requireAuth())) {
     return NextResponse.json({ success: false, error: "Non autorisé" }, { status: 401 });
   }
 
-  const model = MODEL_MAP[params.resource];
+  const { resource } = await params; // ⭐ FIX: Await params here
+  
+  const model = MODEL_MAP[resource];
   if (!model) {
     return NextResponse.json({ success: false, error: "Ressource inconnue" }, { status: 404 });
   }
