@@ -227,4 +227,4 @@ Pour envoyer les emails du formulaire de contact :
 
 ---
 
-Développé avec ❤️ pour le portfolio de **Talaboulma Roumaissa**
+Développé avec ❤️ par **Talaboulma Roumaissa**
